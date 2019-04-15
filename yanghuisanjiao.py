@@ -99,3 +99,28 @@ elif m == k or k == 1:
     print("yang hui triangle's {}th line {}th num is 1".format(m, k))
 else:
     print("k cannot bigger than m!")
+
+
+
+# m行k列的值，相当于C（m-1, k-1）组合数
+m = 9
+k = 5
+# 用到公式：C（n, r）= n!/(r!(n-r)!)
+# 公式分析：m是大于等于k的，m是行数，k是列数。分析后其实一个循环就可以将公式中的三个参数都求出来，然后将相应的参数的值分别存在一个列表中，最后进行计算
+n = m - 1
+r = k - 1
+d = n - r
+targets = [] #
+factorial = 1
+# 一个循环将所有的内容都算出来
+for i in range(1, n+1):
+# 累加是从1开始的，累乘是从1开始的
+    factorial *= i   #阶乘的计算方法
+    if i == r:   #将r的值存入一个列表中
+        targets.append(factorial)
+    if i == d:
+        targets.append(factorial)
+    if i == n:
+        targets.append(factorial)
+print()
+print("yang hui triangle's {}th line {}th num is {}".format(m, k,targets[2]//(targets[0]*targets[1])))
