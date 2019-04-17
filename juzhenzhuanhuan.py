@@ -43,7 +43,7 @@ for i, row in enumerate(matrix):
 print(matrix)
 print(count)
 
-# 写法2 ，交换部分用到封装和解构
+# 写法3 ，交换部分用到封装和解构
 matrix = [[1,2,3],[4,5,6],[7,8,9]]
 print(matrix)
 count = 0
@@ -56,7 +56,7 @@ for i, row in enumerate(matrix):
 print(matrix)
 print(count)
 
-# 写法3，不用enumerate方法
+# 写法4，不用enumerate方法
 matrix = [[1,2,3],[4,5,6],[7,8,9]]
 print(matrix)
 matrix_len = len(matrix)
