@@ -131,14 +131,14 @@ for j in range(length_Bucket):
     
 
 
-# In[17]:
+# In[24]:
 
 
 '''
 选择排序
 '''
 
-# 思想：找到极值（极大值、极小值）的然后跟换下标，每一趟全部比较完后，再将元素放在开头或者结尾
+# 思想：找到极值（极大值、极小值）的然后，更换下标，每一趟全部比较完后，再将元素放在开头或者结尾
 
 # 定义一个列表
 m_list =[[1,9,8,5,6,7,4,3,2],[1,2,3,4,5,6,7,8,9]]
@@ -154,11 +154,13 @@ print(length)
 # 由于该算法主要耗时间的地方就是比较和交换，做标记变量
 count_swap = 0    #交换
 count_iter = 0   #比较
+count_times = 0  #趟数、轮数
 
 
 # 列表值比较
 for i in range(length):
 #     定义最大数字的索引
+    count_times += 1
     maxindex = i
     for j in range(i+1,length):   #for j in range(1, length-i) 与前面语句执行结果一致
         count_iter += 1  #比较计数
@@ -172,6 +174,74 @@ for i in range(length):
         nums[maxindex] = tmp
         count_swap += 1   #交换计数
         
-print(nums,count_iter,count_swap)
+print(nums,count_iter,count_swap,count_times)
         
+
+
+# In[19]:
+
+
+'''
+选择排序-二元选择排序
+'''
+
+# 二元选择排序是为了降低比较的次数，因此每轮比较极大值和极小值一起进行比较，理论上极大值、极小值一起开始比较趟数是之前趟数的一半就可以完成排序，
+
+# 定义一个列表
+m_list = [[1,9,8,5,6,7,4,3,2],[1,2,3,4,5,6,7,8,9],[9,8,7,6,5,4,3,2,1]]
+
+#取出列表
+nums = m_list[0]  # [1,9,8,5,6,7,4,3,2]
+
+# 计算列表的长度
+length = len(nums)
+
+# 设定元素比较和元素交换的变量
+count_swap = 0
+count_iter = 0
+count_times = 0  #趟数、轮数
+
+# 二元选择排序主体
+for i in range(length // 2):  #趟数、轮数
+#     默认定义列表两头分别是极大值和极小值
+    count_times += 1
+    maxindex = i
+    minindex = -i - 1
+    #maxindex 表示最大值的坐标，i元素表示从前到后迭代的元素坐标，因此minindex 表示最小值的坐标，minorigin 表示从后到前迭代的元素坐标
+    minorigin = minindex  
+    
+    for j in range(i+1,length-i):    #代表每一趟比较后，列表首部和末尾都会各少一个在下趟中被比较的元素
+        count_iter += 1
+        
+#         确定好最大值和最小值的下标
+        if nums[maxindex] < nums[j]:   #用最大值与下一个元素比较
+            maxindex = j
+        if nums[minindex] > nums[-j -1]:   #用最小值与上一个元素比较
+            minindex = -j -1
+    
+    print(maxindex,minindex)
+    
+    if i != maxindex:
+        tmp = nums[i]
+        nums[i] = nums[maxindex]
+        nums[maxindex] = tmp
+        count_swap +=1
+        
+        #如果最小值被交换过，要更新索引，（如果i 代表的是 元素正是最小值的索引，那么会被最大值索引替换，在下面进行最小值交换时就会有问题，因此要进行索引更新）
+        if i == minindex or i == length +minindex:  #i == minindex  正索引的情况    i == length +minindex  负索引的情况，负索引是不能和正索引进行比较的
+            minidex = maxindex
+            
+    if minorigin != minindex:
+        tmp = nums[minorigin]
+        nums[minorigin] = nums[minindex]
+        nums[minindex] = tmp
+        count_swap +=1
+        
+print(nums, count_iter,count_swap,count_times)  #趟数由36变为20次
+
+
+# In[ ]:
+
+
+
 
